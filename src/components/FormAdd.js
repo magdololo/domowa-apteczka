@@ -8,7 +8,8 @@ const FormAdd = ({handleAdd}) =>{
     const [nameDrug, setNameDrug] = useState('');
     const [expireDate, setExpireDate] = useState();
     const [quantity, setQuantity] = useState(0);
-
+// const [validityDate, setValidityDate] = useState();
+    // const [openDate, setOpenDate] = useState();
     const setNameDrugChange = (e) =>{
         setNameDrug(e.target.value);
     }

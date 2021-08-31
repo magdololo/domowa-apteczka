@@ -6,7 +6,8 @@ const FormEdit=({handleAddEdit, drug}) => {
     const [nameDrug, setNameDrug] = useState(drug.nameDrug);
     const [expireDate, setExpireDate] = useState(drug.expireDate);
     const [quantity, setQuantity] = useState(drug.quantity);
-
+// const [validityDate, setValidityDate] = useState();
+    // const [openDate, setOpenDate] = useState();
     const setNameDrugChange = (e) =>{
         setNameDrug(e.target.value);
     }

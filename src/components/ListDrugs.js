@@ -1,15 +1,15 @@
 
-import { ListGroup} from 'react-bootstrap';
+import { Accordion} from 'react-bootstrap';
 import Drug from "./Drug";
 
-const ListDrugs = ({drugs, handleEdit})=>{
+const ListDrugs = ({drugs, handleEdit, handleDelete})=>{
 
     return(
-        <ListGroup>
+        <Accordion >
             {drugs.map(drug =>
-                <Drug key={drug.id} drug={drug} onClick={(event) => handleEdit(drug)}/>
+                <Drug key={drug.id} drug={drug} onClickEdit={(event) => handleEdit(drug)} onClickDelete={()=>handleDelete(drug.id)}/>
             )}
-        </ListGroup>
+        </Accordion>
 
 
 )

@@ -1,7 +1,6 @@
 import {useState} from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { ListGroup} from 'react-bootstrap';
 
 import FormAdd from "./FormAdd";
 import FormEdit from "./FormEdit";
@@ -14,8 +13,7 @@ function App() {
     const [drugs, setDrugs] = useState([]);
     const [editDrug, setEditDrug] = useState({});
     const [formState, setFormState] = useState("ADD");
-    // const [validityDate, setValidityDate] = useState();
-    // const [openDate, setOpenDate] = useState();
+
 
     const handleAddDrug = (nameDrug, expireDate,quantity) => {
         //console.log(nameDrug, expireDate,quantity);
@@ -66,6 +64,14 @@ function App() {
         setFormState('ADD');
     }
 
+    const handleDelete=(id)=>{
+        console.log(`delete elementu o id ${id}`);
+         let drugsArray = [...drugs];
+         console.log(drugsArray);
+         drugsArray = drugsArray.filter(drug=>drug.id !== id);
+        console.log(drugsArray);
+         setDrugs(drugsArray);
+    }
 
 
 
@@ -73,7 +79,7 @@ return(
     <div className="App">
         {formState === 'EDIT' ? <FormEdit handleAddEdit={handleAddEdit} drug={editDrug} />  : <FormAdd handleAdd={handleAddDrug} />}
         {/*editDrug to zmienna stanowa */}
-        <ListDrugs drugs={drugs} handleEdit={handleEdit}/>
+        <ListDrugs drugs={drugs} handleEdit={handleEdit} handleDelete={handleDelete}/>
 
     </div>
   );
