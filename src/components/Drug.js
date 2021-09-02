@@ -1,5 +1,5 @@
 import ToggleDrugAccordion from "./ToggleDrugAccordion";
-import {Accordion, Button, Card} from "react-bootstrap";
+import {Accordion, Card} from "react-bootstrap";
 import './Drug.scss';
 
 function Drug(props) {
@@ -8,14 +8,18 @@ function Drug(props) {
     return (
 
         <Card>
-            <Card.Header>
-                <div className="d-flex w-100 justify-content-between ">
+            <Card.Header >
+                <div className="d-flex w-100 justify-content-start ">
                     <h3>{props.drug.nameDrug}</h3>
-                    <ToggleDrugAccordion eventKey="0">Click me!</ToggleDrugAccordion>
+
+                    <div className="buttonDelete" onClick={props.onClickDelete}></div>
+                    <ToggleDrugAccordion eventKey={props.drug.id}>
+
+                    </ToggleDrugAccordion>
                 </div>
 
             </Card.Header>
-            <Accordion.Collapse eventKey="0">
+            <Accordion.Collapse eventKey={props.drug.id}>
                 <Card.Body><button onClick={props.onClickDelete}>x</button></Card.Body>
 
             </Accordion.Collapse>
