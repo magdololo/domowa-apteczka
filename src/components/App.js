@@ -5,8 +5,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import FormAdd from "./FormAdd";
 import FormEdit from "./FormEdit";
 import ListDrugs from "./ListDrugs";
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faChevronDown, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 import './App.scss';
+
+library.add( faTrashAlt, faChevronDown )
 
 function App() {
     const [counter, setCounter] = useState(0);
