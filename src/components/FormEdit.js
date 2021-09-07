@@ -6,8 +6,8 @@ const FormEdit=({handleAddEdit, drug}) => {
     const [nameDrug, setNameDrug] = useState(drug.nameDrug);
     const [expireDate, setExpireDate] = useState(drug.expireDate);
     const [quantity, setQuantity] = useState(drug.quantity);
-// const [validityDate, setValidityDate] = useState();
-    // const [openDate, setOpenDate] = useState();
+    const [validityDate, setValidityDate] = useState();
+    const [openDate, setOpenDate] = useState();
     const setNameDrugChange = (e) =>{
         setNameDrug(e.target.value);
     }
@@ -17,11 +17,16 @@ const FormEdit=({handleAddEdit, drug}) => {
     const setQuantityChange = (e) =>{
         setQuantity(e.target.value);
     }
-
+    const setValidityDateChange=(e)=>{
+        setValidityDate(e.target.value);
+    }
+    const setOpenDateChange = (e) =>{
+        setOpenDate(e.target.value);
+    }
 
     const edit= (e)=>{
         e.preventDefault();
-        handleAddEdit(drug.id, nameDrug, expireDate, quantity);
+        handleAddEdit(drug.id, nameDrug, expireDate, quantity,openDate, validityDate);
         e.target.reset();
     };
 
@@ -45,6 +50,20 @@ const FormEdit=({handleAddEdit, drug}) => {
                 <Form.Label column sm="3">Ilość: </Form.Label>
                 <Col sm="7">
                     <Form.Control type="number" placeholder="Podaj ilosc"  value={quantity}  onChange={ setQuantityChange}/>
+                </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="openDate">
+                <Form.Label column sm="3">Data otwarcia: </Form.Label>
+                <Col sm="7">
+                    <Form.Control type="date" placeholder="Wybierz"  value={openDate}  onChange={ setOpenDateChange}/>
+                </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="validityDate">
+                <Form.Label column sm="3">Okres ważności po otwarciu: </Form.Label>
+                <Col sm="7">
+                    <Form.Control type="number" placeholder="Podaj w dniach"  value={validityDate}  onChange={ setValidityDateChange}/>
                 </Col>
             </Form.Group>
 

@@ -19,13 +19,15 @@ function App() {
     const [formState, setFormState] = useState("ADD");
 
 
-    const handleAddDrug = (nameDrug, expireDate,quantity) => {
+    const handleAddDrug = (nameDrug, expireDate,quantity,openDate, validityDate) => {
         //console.log(nameDrug, expireDate,quantity);
         setCounter(prevValue=>prevValue + 1);
          const drug = {
             nameDrug,
             expireDate,
             quantity,
+             openDate,
+             validityDate,
             id: counter
         }
         setDrugs([...drugs,drug]);
@@ -50,13 +52,15 @@ function App() {
         setFormState('EDIT');
     }
 
-    const handleAddEdit=(id, nameDrug, expireDate, quantity)=>{
+    const handleAddEdit=(id, nameDrug, expireDate, quantity,openDate,validityDate)=>{
         let drugsArray = [...drugs];
         //console.log(drugsArray);
         const editDrug = {
             nameDrug,
             expireDate,
             quantity,
+            openDate,
+            validityDate,
             id: id
         }
         console.log(editDrug);

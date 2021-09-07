@@ -8,8 +8,8 @@ const FormAdd = ({handleAdd}) =>{
     const [nameDrug, setNameDrug] = useState('');
     const [expireDate, setExpireDate] = useState();
     const [quantity, setQuantity] = useState(0);
-// const [validityDate, setValidityDate] = useState();
-    // const [openDate, setOpenDate] = useState();
+    const [validityDate, setValidityDate] = useState();
+    const [openDate, setOpenDate] = useState();
     const setNameDrugChange = (e) =>{
         setNameDrug(e.target.value);
     }
@@ -19,10 +19,16 @@ const FormAdd = ({handleAdd}) =>{
     const setQuantityChange = (e) =>{
         setQuantity(e.target.value);
     }
+    const setOpenDateChange=(e)=>{
+        setOpenDate(e.target.value);
+    }
+    const setValidityDateChange=(e)=>{
+        setValidityDate(e.target.value);
+    }
 
     const add =(e)=>{
         e.preventDefault();
-        handleAdd(nameDrug, expireDate, quantity);
+        handleAdd(nameDrug, expireDate, quantity,openDate,validityDate);
         e.target.reset();
         };
 
@@ -47,6 +53,20 @@ const FormAdd = ({handleAdd}) =>{
                 <Form.Label column sm="3">Ilość: </Form.Label>
                 <Col sm="7">
                     <Form.Control type="number" placeholder="Podaj ilosc" defaultValue=""  onChange={ setQuantityChange}/>
+                </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="openDate">
+                <Form.Label column sm="3">Data otwarcia: </Form.Label>
+                <Col sm="7">
+                    <Form.Control type="date" placeholder="Wybierz datę" defaultValue=""  onChange={ setOpenDateChange}/>
+                </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="validityDate">
+                <Form.Label column sm="3">Okres ważnosci po otwarciu: </Form.Label>
+                <Col sm="7">
+                    <Form.Control type="number" placeholder="Podaj w dniach" defaultValue=""  onChange={ setValidityDateChange}/>
                 </Col>
             </Form.Group>
 
