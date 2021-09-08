@@ -1,5 +1,5 @@
 import {useState} from 'react';
-
+import {useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import FormAdd from "./FormAdd";
@@ -18,6 +18,28 @@ function App() {
     const [editDrug, setEditDrug] = useState({});
     const [formState, setFormState] = useState("ADD");
 
+    const asyncFetch = () =>{
+        fetch('http://localhost:4000/drugs')
+            .then(response => {
+                if (response.ok) {
+                    return response;
+                }
+                throw Error(response.status)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("data z response")
+                console.log(data);
+
+                setDrugs (data) ;
+                console.log(drugs)
+
+            })
+    }
+    useEffect(() =>{
+        asyncFetch();
+    },[]);
+    console.log("po useEffect" + drugs)
 
     const handleAddDrug = (nameDrug, expireDate,quantity,openDate, validityDate) => {
         //console.log(nameDrug, expireDate,quantity);
