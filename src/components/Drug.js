@@ -1,20 +1,29 @@
 import ToggleDrugAccordion from './ToggleDrugAccordion';
-import {Accordion,Button, Card} from 'react-bootstrap';
+import {Accordion,Button, Badge, Card} from 'react-bootstrap';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useState} from 'react';
 import './Drug.scss';
 
 function Drug(props) {
-    let [todayDate, setTodayDate] = useState(new Date());
+    let [todayDate] = useState(new Date());
 
 
+    const IsImportant = () => {
 
+        const openDate = new Date(props.drug.openDate);
+        const  validityDateAfterOpen = new Date(openDate.valueOf());
+        validityDateAfterOpen.setHours(0,0,0,0);
 
-    console.log(todayDate);
-    console.log(props.drug.expireDate);
-
-
-
+        validityDateAfterOpen.setDate(validityDateAfterOpen.getDate()+ parseInt(props.drug.validityDate));
+        return validityDateAfterOpen;
+    }
+    // console.log("validityDateAfterOpen");
+    // console.log(IsImportant());
+    // console.log('sprawdzanie wyrazenia');
+    // console.log('pierwsza czesc ' + (todayDate < Date.parse(props.drug.expireDate)));
+    // console.log('druga czesc ' + (todayDate < IsImportant()));
+    // const wyrazenie = (todayDate < Date.parse(props.drug.expireDate)) && (todayDate < IsImportant()) ? "red" : "black";
+    // console.log(wyrazenie);
     return (
         <Card>
             <Card.Header >
@@ -23,7 +32,14 @@ function Drug(props) {
                     <ToggleDrugAccordion eventKey={props.drug.id}>
 
                     </ToggleDrugAccordion>
-                    <h3 style={todayDate < Date.parse(props.drug.expireDate) ? {color: "black"} : {color: "red"} }>{props.drug.nameDrug}</h3>
+                    <h3 style={(todayDate < Date.parse(props.drug.expireDate)) && (todayDate < IsImportant()) ? {color: "black"} : {color: "red"} }>{props.drug.nameDrug}
+                        {todayDate > Date.parse(props.drug.expireDate) ?
+                            <Badge bg="danger" style={{ fontSize: '10px', marginLeft: '5px'}}>Data ważności</Badge>:null}
+                        {todayDate > IsImportant() ?
+                            // <small  style={{ fontSize: '12px', marginLeft: '5px', color: 'red'}}>(skończył się termin ważności po otwarciu) </small> : null }
+                            <Badge bg="danger" style={{ fontSize: '10px', marginLeft: '5px'}}>Data otwarcia</Badge>:null}
+                    </h3>
+                    {/*//<h3 style={(todayDate > Date.parse(props.drug.expireDate)) || (todayDate > IsImportant()) ? {color: "red"} : {color: "black"} }>{props.drug.nameDrug}</h3>*/}
 
                 <div className="buttonDelete" onClick={props.onClickDelete}><FontAwesomeIcon icon="trash-alt" size="lg"/></div>
                 </div>
