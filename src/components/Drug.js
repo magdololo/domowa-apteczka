@@ -32,14 +32,13 @@ function Drug(props) {
                     <ToggleDrugAccordion eventKey={props.drug.id}>
 
                     </ToggleDrugAccordion>
-                    <h3 style={(todayDate < Date.parse(props.drug.expireDate)) && (todayDate < IsImportant()) ? {color: "black"} : {color: "red"} }>{props.drug.nameDrug}
+                    <h3 style={(todayDate > Date.parse(props.drug.expireDate)) || (todayDate > IsImportant()) ? {color: "red"} : {color: "black"} }>{props.drug.nameDrug}
                         {todayDate > Date.parse(props.drug.expireDate) ?
                             <Badge bg="danger" style={{ fontSize: '10px', marginLeft: '5px'}}>Data ważności</Badge>:null}
                         {todayDate > IsImportant() ?
-                            // <small  style={{ fontSize: '12px', marginLeft: '5px', color: 'red'}}>(skończył się termin ważności po otwarciu) </small> : null }
                             <Badge bg="danger" style={{ fontSize: '10px', marginLeft: '5px'}}>Data otwarcia</Badge>:null}
                     </h3>
-                    {/*//<h3 style={(todayDate > Date.parse(props.drug.expireDate)) || (todayDate > IsImportant()) ? {color: "red"} : {color: "black"} }>{props.drug.nameDrug}</h3>*/}
+
 
                 <div className="buttonDelete" onClick={props.onClickDelete}><FontAwesomeIcon icon="trash-alt" size="lg"/></div>
                 </div>
