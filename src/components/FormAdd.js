@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Form, Button, Col, Row} from 'react-bootstrap';
-
+import {addDrug} from "./DrugService";
 
 const FormAdd = ({handleAdd}) =>{
 
@@ -28,8 +28,11 @@ const FormAdd = ({handleAdd}) =>{
 
     const add =(e)=>{
         e.preventDefault();
-        handleAdd(nameDrug, expireDate, quantity,openDate,validityDate);
+        let id = addDrug(nameDrug, expireDate, quantity,openDate,validityDate);
+        handleAdd(nameDrug, expireDate,quantity,openDate, validityDate,id);
         e.target.reset();
+
+
         };
 
 

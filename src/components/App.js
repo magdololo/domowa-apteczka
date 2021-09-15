@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import FormAdd from "./FormAdd";
 import FormEdit from "./FormEdit";
+import {removeDrug, editDrug as editDrugService} from "./DrugService";
 import ListDrugs from "./ListDrugs";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faChevronDown, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
@@ -13,7 +14,7 @@ import './App.scss';
 library.add( faTrashAlt, faChevronDown )
 
 function App() {
-    const [counter, setCounter] = useState(0);
+
     const [drugs, setDrugs] = useState([]);
     const [editDrug, setEditDrug] = useState({});
     const [formState, setFormState] = useState("ADD");
@@ -41,17 +42,17 @@ function App() {
     },[]);
     console.log("po useEffect" + drugs)
 
-    const handleAddDrug = (nameDrug, expireDate,quantity,openDate, validityDate) => {
+    const handleAddDrug = (nameDrug, expireDate,quantity,openDate, validityDate,id) => {
         //console.log(nameDrug, expireDate,quantity);
-        setCounter(prevValue=>prevValue + 1);
-         const drug = {
+        const drug = {
             nameDrug,
             expireDate,
             quantity,
-             openDate,
-             validityDate,
-            id: counter
+            openDate,
+            validityDate,
+            id
         }
+
         setDrugs([...drugs,drug]);
          alert(`Dodales ${nameDrug} z datą ważności do: ${expireDate} w ilości ${quantity} do listy leków`);
 
@@ -72,12 +73,13 @@ function App() {
         console.log(drug);
         setEditDrug(drug);
         setFormState('EDIT');
+
     }
 
     const handleAddEdit=(id, nameDrug, expireDate, quantity,openDate,validityDate)=>{
         let drugsArray = [...drugs];
         //console.log(drugsArray);
-        const editDrug = {
+        const editDrugInState = {
             nameDrug,
             expireDate,
             quantity,
@@ -85,13 +87,14 @@ function App() {
             validityDate,
             id: id
         }
-        console.log(editDrug);
-        drugsArray = drugsArray.filter(editDrug=>editDrug.id !== id);
+        console.log(editDrugInState);
+        drugsArray = drugsArray.filter(editDrugInState=>editDrugInState.id !== id);
         console.log(drugsArray);
-        drugsArray.push(editDrug);
+        drugsArray.push(editDrugInState);
         setDrugs(drugsArray);
         alert(`Dodales zmiany w ${nameDrug}`);
         setFormState('ADD');
+        editDrugService(quantity, openDate, id);
     }
 
     const handleDelete=(id)=>{
@@ -101,6 +104,7 @@ function App() {
          drugsArray = drugsArray.filter(drug=>drug.id !== id);
         console.log(drugsArray);
          setDrugs(drugsArray);
+         removeDrug(id);
     }
 
 

@@ -1,12 +1,11 @@
 import ToggleDrugAccordion from './ToggleDrugAccordion';
 import {Accordion,Button, Badge, Card} from 'react-bootstrap';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import './Drug.scss';
 
 function Drug(props) {
     let [todayDate] = useState(new Date());
-
 
     const IsImportant = () => {
 
@@ -17,13 +16,7 @@ function Drug(props) {
         validityDateAfterOpen.setDate(validityDateAfterOpen.getDate()+ parseInt(props.drug.validityDate));
         return validityDateAfterOpen;
     }
-    // console.log("validityDateAfterOpen");
-    // console.log(IsImportant());
-    // console.log('sprawdzanie wyrazenia');
-    // console.log('pierwsza czesc ' + (todayDate < Date.parse(props.drug.expireDate)));
-    // console.log('druga czesc ' + (todayDate < IsImportant()));
-    // const wyrazenie = (todayDate < Date.parse(props.drug.expireDate)) && (todayDate < IsImportant()) ? "red" : "black";
-    // console.log(wyrazenie);
+
     return (
         <Card>
             <Card.Header >
@@ -43,6 +36,7 @@ function Drug(props) {
                 <div className="buttonDelete" onClick={props.onClickDelete}><FontAwesomeIcon icon="trash-alt" size="lg"/></div>
                 </div>
             </Card.Header>
+
             <Accordion.Collapse eventKey={props.drug.id}>
 
                 <Card.Body>
@@ -54,6 +48,7 @@ function Drug(props) {
                         <p className="mb-1">Data otwarcia: {props.drug.openDate}</p>
                         <p className="mb-1">Okres ważności po otwarciu: {props.drug.validityDate} dni</p>
                 </Card.Body>
+
 
             </Accordion.Collapse>
         </Card>
