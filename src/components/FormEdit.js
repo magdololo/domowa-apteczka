@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Form, Button, Col, Row} from 'react-bootstrap';
 
@@ -6,8 +6,17 @@ const FormEdit=({handleAddEdit, drug}) => {
     const [nameDrug, setNameDrug] = useState(drug.nameDrug);
     const [expireDate, setExpireDate] = useState(drug.expireDate);
     const [quantity, setQuantity] = useState(drug.quantity);
-    const [validityDate, setValidityDate] = useState();
-    const [openDate, setOpenDate] = useState();
+    const [validityDate, setValidityDate] = useState(drug.validityDate);
+    const [openDate, setOpenDate] = useState(drug.openDate);
+
+    useEffect(() =>{
+        setNameDrug(drug.nameDrug);
+        setExpireDate(drug.expireDate);
+        setQuantity(drug.quantity);
+        setValidityDate(drug.validityDate);
+        setOpenDate(drug.openDate);
+    },[drug]);
+
     const setNameDrugChange = (e) =>{
         setNameDrug(e.target.value);
     }
