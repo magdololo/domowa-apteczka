@@ -17,7 +17,8 @@ function App() {
 
     const [drugs, setDrugs] = useState([]);
     const [editDrug, setEditDrug] = useState({});
-    const [formState, setFormState] = useState("ADD");
+    const [formState, setFormState] = useState();
+    const [formShow, setFormShow] = useState(false);
 
     const asyncFetch = () =>{
         fetch('http://localhost:4000/drugs')
@@ -70,7 +71,9 @@ function App() {
     };
 
     const handleEdit = (drug) =>{
+        console.log("handleEdit" )
         console.log(drug);
+
         setEditDrug(drug);
         setFormState('EDIT');
 
@@ -111,7 +114,9 @@ function App() {
 
 return(
     <div className="App">
-        {formState === 'EDIT' ? <FormEdit handleAddEdit={handleAddEdit} drug={editDrug} />  : <FormAdd handleAdd={handleAddDrug} />}
+        <button className="button" onClick={()=> setFormShow(prevState => !prevState)}>+</button>
+
+        {formState === 'EDIT' ? <FormEdit handleAddEdit={handleAddEdit} drug={editDrug} />  : formShow ? <FormAdd handleAdd={handleAddDrug}/>  : null}
         {/*editDrug to zmienna stanowa */}
         <ListDrugs drugs={drugs} handleEdit={handleEdit} handleDelete={handleDelete}/>
 

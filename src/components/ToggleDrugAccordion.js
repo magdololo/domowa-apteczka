@@ -1,4 +1,4 @@
-import {useContext, useState, useEffect} from 'react';
+import {useContext} from 'react';
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
 import AccordionContext from "react-bootstrap/AccordionContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -15,7 +15,7 @@ function ToggleDrugAccordion({ children, eventKey, callback, }) {
     return (
         <button
             type="text"
-            className = {isCurrentEventKey ? "arrow-up" : "arrow-down"}
+            className = {isCurrentEventKey ? "arrow-down" : "arrow-up"}
             style={
                 {
                   border: "0",
@@ -24,7 +24,7 @@ function ToggleDrugAccordion({ children, eventKey, callback, }) {
 
             onClick={decoratedOnClick}
         >
-            {isCurrentEventKey ?  <FontAwesomeIcon icon="chevron-down"  size="lg" /> :  <FontAwesomeIcon icon= "chevron-down" rotation={180} size="lg" />}
+            {isCurrentEventKey ?  <FontAwesomeIcon icon="chevron-down" rotation={180} size="lg" /> :  <FontAwesomeIcon icon= "chevron-down"  size="lg" />}
 
             {children}
         </button>

@@ -26,9 +26,9 @@ const FormAdd = ({handleAdd}) =>{
         setValidityDate(e.target.value);
     }
 
-    const add =(e)=>{
+    const add = async (e)=>{
         e.preventDefault();
-        let id = addDrug(nameDrug, expireDate, quantity,openDate,validityDate);
+        let id =  await addDrug(nameDrug, expireDate, quantity,openDate,validityDate);
         handleAdd(nameDrug, expireDate,quantity,openDate, validityDate,id);
         e.target.reset();
 
@@ -37,7 +37,7 @@ const FormAdd = ({handleAdd}) =>{
 
 
     return (
-        <Form onSubmit={(e)=>add(e)} >
+        <Form id="addForm" onSubmit={(e)=>add(e)} >
             <Form.Group as={Row} className="mb-3" controlId="nameDrug">
                 <Form.Label column sm="3">Nazwa leku: </Form.Label>
                 <Col sm="7">

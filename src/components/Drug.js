@@ -1,7 +1,7 @@
 import ToggleDrugAccordion from './ToggleDrugAccordion';
 import {Accordion,Button, Badge, Card} from 'react-bootstrap';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {useEffect, useState} from 'react';
+import { useState} from 'react';
 import './Drug.scss';
 
 function Drug(props) {
