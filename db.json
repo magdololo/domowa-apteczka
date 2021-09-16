@@ -1,0 +1,36 @@
+{
+  "drugs": [
+    {
+      "nameDrug": "nurofen",
+      "expireDate": "2021-12-31",
+      "openDate": "2021-09-16",
+      "validityDate": "30",
+      "quantity": "1",
+      "id": 1
+    },
+    {
+      "nameDrug": "mucosolvan",
+      "expireDate": "2021-11-30",
+      "openDate": "2021-09-17",
+      "validityDate": "14",
+      "quantity": "5",
+      "id": 2
+    },
+    {
+      "nameDrug": "ibum ",
+      "expireDate": "2021-12-31",
+      "openDate": "2021-09-01",
+      "validityDate": "11",
+      "quantity": "2",
+      "id": 3
+    },
+    {
+      "nameDrug": "sambucol",
+      "expireDate": "2022-02-23",
+      "openDate": "2021-09-16",
+      "validityDate": "59",
+      "quantity": "3",
+      "id": 4
+    }
+  ]
+}
