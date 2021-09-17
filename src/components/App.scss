@@ -1,8 +1,21 @@
 .App {
-
+  .button {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border-width: 3px;
+    position: absolute;
+    bottom: 10px;
+    right: 50px;
+    border-top-color: crimson;
+    border-bottom-color: aquamarine;
+    border-left-color: yellow;
+    border-right-color: green;
+    background-color: white;
+    font-size: 40px;
+  }
 
   Form {
-
     max-width: 80%;
     margin: 40px auto;
     Button {

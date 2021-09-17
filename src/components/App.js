@@ -3,9 +3,10 @@ import {useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import FormAdd from "./FormAdd";
-import FormEdit from "./FormEdit";
+import FormModal from "./FormModal";
 import {removeDrug, editDrug as editDrugService} from "./DrugService";
 import ListDrugs from "./ListDrugs";
+
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faChevronDown, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
@@ -77,6 +78,7 @@ function App() {
         setEditDrug(drug);
         setFormState('EDIT');
 
+
     }
 
     const handleAddEdit=(id, nameDrug, expireDate, quantity,openDate,validityDate)=>{
@@ -100,6 +102,7 @@ function App() {
         editDrugService(quantity, openDate, id);
     }
 
+
     const handleDelete=(id)=>{
         console.log(`delete elementu o id ${id}`);
          let drugsArray = [...drugs];
@@ -116,7 +119,7 @@ return(
     <div className="App">
         <button className="button" onClick={()=> setFormShow(prevState => !prevState)}>+</button>
 
-        {formState === 'EDIT' ? <FormEdit handleAddEdit={handleAddEdit} drug={editDrug} />  : formShow ? <FormAdd handleAdd={handleAddDrug}/>  : null}
+        {formState === 'EDIT' ? <FormModal handleAddEdit={handleAddEdit} drug={editDrug} /> : formShow ? <FormAdd handleAdd={handleAddDrug}/>  : null}
         {/*editDrug to zmienna stanowa */}
         <ListDrugs drugs={drugs} handleEdit={handleEdit} handleDelete={handleDelete}/>
 
@@ -125,3 +128,4 @@ return(
 }
 
 export default App;
+//<FormEdit handleAddEdit={handleAddEdit} drug={editDrug} />

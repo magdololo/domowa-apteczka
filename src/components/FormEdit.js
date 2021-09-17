@@ -76,7 +76,7 @@ const FormEdit=({handleAddEdit, drug}) => {
                 </Col>
             </Form.Group>
 
-            <Button variant="primary" type="submit" >Edytuj Lek</Button>
+
         </Form>
     )
 }

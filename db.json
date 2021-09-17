@@ -5,7 +5,7 @@
       "expireDate": "2021-12-31",
       "openDate": "2021-09-16",
       "validityDate": "30",
-      "quantity": "1",
+      "quantity": "3",
       "id": 1
     },
     {
@@ -15,14 +15,6 @@
       "validityDate": "14",
       "quantity": "5",
       "id": 2
-    },
-    {
-      "nameDrug": "ibum ",
-      "expireDate": "2021-12-31",
-      "openDate": "2021-09-01",
-      "validityDate": "11",
-      "quantity": "2",
-      "id": 3
     },
     {
       "nameDrug": "sambucol",
