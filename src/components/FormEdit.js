@@ -35,12 +35,13 @@ const FormEdit=({handleAddEdit, drug}) => {
 
     const edit= (e)=>{
         e.preventDefault();
-        handleAddEdit(drug.id, nameDrug, expireDate, quantity,openDate, validityDate);
+        console.log("w formModal" + drug);
+        handleAddEdit(drug.id, nameDrug, expireDate, quantity, openDate, validityDate);
         e.target.reset();
     };
 
     return (
-        <Form onSubmit={(e)=>edit(e)} >
+         <Form onSubmit={(e)=>edit(e)}>
             <Form.Group as={Row} className="mb-3" controlId="nameDrug">
                 <Form.Label column sm="3">Nazwa leku: </Form.Label>
                 <Col sm="7">
@@ -75,7 +76,7 @@ const FormEdit=({handleAddEdit, drug}) => {
                     <Form.Control type="number" placeholder="Podaj w dniach"  value={validityDate}  onChange={ setValidityDateChange}/>
                 </Col>
             </Form.Group>
-
+            <Button variant="primary" type="submit"  >Edytuj Lek</Button>
 
         </Form>
     )

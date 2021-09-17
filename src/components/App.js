@@ -92,7 +92,7 @@ function App() {
             validityDate,
             id: id
         }
-        console.log(editDrugInState);
+        console.log(editDrug);
         drugsArray = drugsArray.filter(editDrugInState=>editDrugInState.id !== id);
         console.log(drugsArray);
         drugsArray.push(editDrugInState);
@@ -117,11 +117,12 @@ function App() {
 
 return(
     <div className="App">
+
         <button className="button" onClick={()=> setFormShow(prevState => !prevState)}>+</button>
 
-        {formState === 'EDIT' ? <FormModal handleAddEdit={handleAddEdit} drug={editDrug} /> : formShow ? <FormAdd handleAdd={handleAddDrug}/>  : null}
+        {formState === 'EDIT' ? <FormModal handleEdit={handleAddEdit} drug={editDrug} /> : formShow ? <FormAdd handleAdd={handleAddDrug}/>  : null}
         {/*editDrug to zmienna stanowa */}
-        <ListDrugs drugs={drugs} handleEdit={handleEdit} handleDelete={handleDelete}/>
+        <ListDrugs drugs={drugs} handleEdit={handleAddEdit} handleDelete={handleDelete}/>
 
     </div>
   );
