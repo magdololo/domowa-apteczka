@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Form, Button, Col, Row} from 'react-bootstrap';
 
-const FormEdit=({handleAddEdit, drug}) => {
+const FormEdit=({handleAddEdit, drug, closeModal}) => {
     const [nameDrug, setNameDrug] = useState(drug.nameDrug);
     const [expireDate, setExpireDate] = useState(drug.expireDate);
     const [quantity, setQuantity] = useState(drug.quantity);
@@ -38,6 +38,7 @@ const FormEdit=({handleAddEdit, drug}) => {
         console.log("w formModal" + drug);
         handleAddEdit(drug.id, nameDrug, expireDate, quantity, openDate, validityDate);
         e.target.reset();
+        closeModal();
     };
 
     return (

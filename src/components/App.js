@@ -3,7 +3,6 @@ import {useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import FormAdd from "./FormAdd";
-import FormModal from "./FormModal";
 import {removeDrug, editDrug as editDrugService} from "./DrugService";
 import ListDrugs from "./ListDrugs";
 
@@ -20,6 +19,8 @@ function App() {
     const [editDrug, setEditDrug] = useState({});
     const [formState, setFormState] = useState();
     const [formShow, setFormShow] = useState(false);
+
+
 
     const asyncFetch = () =>{
         fetch('http://localhost:4000/drugs')
@@ -100,6 +101,8 @@ function App() {
         alert(`Dodales zmiany w ${nameDrug}`);
         setFormState('ADD');
         editDrugService(quantity, openDate, id);
+
+
     }
 
 
@@ -120,9 +123,9 @@ return(
 
         <button className="button" onClick={()=> setFormShow(prevState => !prevState)}>+</button>
 
-        {formState === 'EDIT' ? <FormModal handleEdit={handleAddEdit} drug={editDrug} /> : formShow ? <FormAdd handleAdd={handleAddDrug}/>  : null}
+        {formShow ? <FormAdd handleAdd={handleAddDrug}/>  : null}
         {/*editDrug to zmienna stanowa */}
-        <ListDrugs drugs={drugs} handleEdit={handleAddEdit} handleDelete={handleDelete}/>
+        <ListDrugs drugs={drugs} handleEdit={handleAddEdit} handleDelete={handleDelete} />
 
     </div>
   );

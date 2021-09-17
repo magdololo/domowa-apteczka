@@ -13,7 +13,7 @@
       "expireDate": "2021-11-30",
       "openDate": "2021-09-17",
       "validityDate": "14",
-      "quantity": "8",
+      "quantity": "11",
       "id": 2
     },
     {
@@ -23,6 +23,14 @@
       "validityDate": "59",
       "quantity": "3",
       "id": 4
+    },
+    {
+      "nameDrug": "nutrof",
+      "expireDate": "2022-03-31",
+      "openDate": "2021-09-17",
+      "validityDate": "180",
+      "quantity": "15",
+      "id": 5
     }
   ]
 }
