@@ -1,3 +1,29 @@
+import {useEffect} from "react";
+
+export const asyncFetch = (drugs, setDrugs) =>{
+    fetch('http://localhost:4000/drugs')
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            throw Error(response.status)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("data z response")
+            console.log(data);
+
+            setDrugs (data) ;
+            console.log(drugs)
+
+        })
+}
+
+
+
+
+
+
 export async function addDrug(nameDrug, expireDate, quantity,openDate,validityDate) {
     const data = {
         "nameDrug": nameDrug,

@@ -21,21 +21,25 @@ function Drug(props) {
     return (
         <Card>
             <Card.Header >
-                <div className="d-flex w-100 justify-content-between ">
 
+                <div className="d-flex w-100 justify-content-between ">
                     <ToggleDrugAccordion eventKey={props.drug.id}>
+                        <h3 className="accordion-title" style={(todayDate > Date.parse(props.drug.expireDate)) || (todayDate > IsImportant()) ? {color: "red"} : {color: "black"} }>{props.drug.nameDrug}
+                            {todayDate > Date.parse(props.drug.expireDate) ?
+                                <Badge bg="danger" style={{ fontSize: '10px', marginLeft: '5px'}}>Data ważności</Badge>:null}
+                            {todayDate > IsImportant() ?
+                                <Badge bg="danger" style={{ fontSize: '10px', marginLeft: '5px'}}>Data otwarcia</Badge>:null}
+                        </h3>
+
 
                     </ToggleDrugAccordion>
-                    <h3 style={(todayDate > Date.parse(props.drug.expireDate)) || (todayDate > IsImportant()) ? {color: "red"} : {color: "black"} }>{props.drug.nameDrug}
-                        {todayDate > Date.parse(props.drug.expireDate) ?
-                            <Badge bg="danger" style={{ fontSize: '10px', marginLeft: '5px'}}>Data ważności</Badge>:null}
-                        {todayDate > IsImportant() ?
-                            <Badge bg="danger" style={{ fontSize: '10px', marginLeft: '5px'}}>Data otwarcia</Badge>:null}
-                    </h3>
 
-
-                <div className="buttonDelete" onClick={props.onClickDelete}><FontAwesomeIcon icon="trash-alt" size="lg"/></div>
+                    <div className="buttonDelete" onClick={props.onClickDelete}>
+                        <FontAwesomeIcon icon="trash-alt" size="lg"/>
+                    </div>
                 </div>
+
+
             </Card.Header>
 
             <Accordion.Collapse eventKey={props.drug.id}>

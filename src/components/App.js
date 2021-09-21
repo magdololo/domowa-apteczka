@@ -3,7 +3,7 @@ import {useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import FormAdd from "./FormAdd";
-import {removeDrug, editDrug as editDrugService} from "./DrugService";
+import {asyncFetch, removeDrug, editDrug as editDrugService} from "./DrugService";
 import ListDrugs from "./ListDrugs";
 
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -20,30 +20,11 @@ function App() {
     const [formState, setFormState] = useState();
     const [formShow, setFormShow] = useState(false);
 
-
-
-    const asyncFetch = () =>{
-        fetch('http://localhost:4000/drugs')
-            .then(response => {
-                if (response.ok) {
-                    return response;
-                }
-                throw Error(response.status)
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log("data z response")
-                console.log(data);
-
-                setDrugs (data) ;
-                console.log(drugs)
-
-            })
-    }
     useEffect(() =>{
-        asyncFetch();
+        asyncFetch(drugs, setDrugs);
     },[]);
-    console.log("po useEffect" + drugs)
+
+
 
     const handleAddDrug = (nameDrug, expireDate,quantity,openDate, validityDate,id) => {
         //console.log(nameDrug, expireDate,quantity);
