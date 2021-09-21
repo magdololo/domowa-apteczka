@@ -2,10 +2,9 @@ import {useState} from 'react';
 import {useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import FormAdd from "./FormAdd";
 import {asyncFetch, removeDrug, editDrug as editDrugService} from "./DrugService";
 import ListDrugs from "./ListDrugs";
-
+import FormModal from "./FormModal";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faChevronDown, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
@@ -53,15 +52,6 @@ function App() {
 
     };
 
-    const handleEdit = (drug) =>{
-        console.log("handleEdit" )
-        console.log(drug);
-
-        setEditDrug(drug);
-        setFormState('EDIT');
-
-
-    }
 
     const handleAddEdit=(id, nameDrug, expireDate, quantity,openDate,validityDate)=>{
         let drugsArray = [...drugs];
@@ -81,7 +71,7 @@ function App() {
         setDrugs(drugsArray);
         alert(`Dodales zmiany w ${nameDrug}`);
         setFormState('ADD');
-        editDrugService(quantity, openDate, id);
+        editDrugService(quantity, openDate, id, validityDate);
 
 
     }
@@ -102,15 +92,17 @@ function App() {
 return(
     <div className="App">
 
-        <button className="button" onClick={()=> setFormShow(prevState => !prevState)}>+</button>
+        <button className="button" onClick={()=>{
+            setFormShow(true);
+            setFormState("ADD");
+        }}>+</button>
+         <FormModal handleAdd={handleAddDrug} showModal={formShow} formState={formState} setFormShow={setFormShow}/>
 
-        {formShow ? <FormAdd handleAdd={handleAddDrug}/>  : null}
         {/*editDrug to zmienna stanowa */}
-        <ListDrugs drugs={drugs} handleEdit={handleAddEdit} handleDelete={handleDelete} />
+        <ListDrugs drugs={drugs} handleEdit={handleAddEdit} handleDelete={handleDelete} setFormShow={setFormShow}/>
 
     </div>
   );
 }
 
 export default App;
-//<FormEdit handleAddEdit={handleAddEdit} drug={editDrug} />

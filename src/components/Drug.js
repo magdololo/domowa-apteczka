@@ -7,6 +7,7 @@ import FormModal from "./FormModal";
 
 function Drug(props) {
     let [todayDate] = useState(new Date());
+    const [showModal, setShowModal] = useState(false);
 
     const IsImportant = () => {
 
@@ -47,8 +48,9 @@ function Drug(props) {
                 <Card.Body>
                     <div className="d-flex w-100 justify-content-between ">
                         <p className="mb-1">Data ważności: {props.drug.expireDate}</p>
-                        {/*<Button variant="primary" size="sm"  onClick={props.onClickEdit}>edytuj</Button>*/}
-                        <FormModal handleAddEdit={props.handleAddEdit} drug={props.drug} />
+                        <Button variant="primary" size="sm"  onClick={()=>{setShowModal(true)}}>edytuj</Button>
+
+                        <FormModal handleAddEdit={props.handleAddEdit} drug={props.drug} showModal={showModal}  setFormShow={setShowModal}/>
                     </div>
                         <p className="mb-1">Ilość: {props.drug.quantity}</p>
                         <p className="mb-1">Data otwarcia: {props.drug.openDate}</p>
