@@ -1,35 +1,38 @@
 import {Button, Modal} from 'react-bootstrap';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import FormEdit from "./FormEdit";
+import FormAdd from "./FormAdd";
 import 'bootstrap/dist/css/bootstrap.min.css';
-const  FormModal = ({handleAddEdit, drug}) => {
+import {asyncFetch} from "./DrugService";
+const  FormModal = ({handleAddEdit, drug, handleAdd, formState, showModal, setFormShow}) => {
 
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(showModal);
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setShow(false);
+        setFormShow(false);
+    }
     const handleShow = () => setShow(true);
 
-
+    useEffect(() =>{
+        setShow(showModal);
+    },[showModal, formState]);
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
-                edytuj
-            </Button>
+
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    {/*<Modal.Title>Wypełnij formularz</Modal.Title>*/}
                 </Modal.Header>
-                <Modal.Body><FormEdit handleAddEdit={handleAddEdit} drug={drug} closeModal={handleClose} /></Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    {/**<Button variant="primary" type="submit"/> edytuj lek <Button/>*/}
-                    {/*<Button variant="primary" >*/}
-                    {/*    Edytuj lek*/}
-                    {/*</Button>*/}
-                </Modal.Footer>
+                <Modal.Body>
+                    {formState==="ADD" ?
+                        <FormAdd handleAdd={handleAdd}/> :
+                    <FormEdit handleAddEdit={handleAddEdit} drug={drug} closeModal={handleClose} />}
+                </Modal.Body>
+
+                {/*<Modal.Footer>*/}
+                {/*</Modal.Footer>*/}
             </Modal>
         </>
     );
