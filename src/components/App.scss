@@ -1,20 +1,59 @@
 .App {
-  .button {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    border-width: 3px;
-    position: absolute;
-    bottom: 10px;
-    right: 50px;
-    border-top-color: crimson;
-    border-bottom-color: aquamarine;
-    border-left-color: yellow;
-    border-right-color: green;
-    background-color: white;
-    font-size: 40px;
-  }
+    height: 100vh;
 
+  .bottom_menu{
+    position: fixed;
+    bottom: 2vh;
+    min-height: 8vh;
+    width: 90vw;
+    margin: 0 auto;
+
+    .form-control {
+      width: 60%;
+      margin-left: 5%;
+    }
+    //.input-group {
+    //  margin-right: 3%;
+    //  margin-left: 5%;
+    //
+    //  width: 70%;
+    //
+    //  Button {
+    //    flex: 1 1 auto;
+    //    width: 20%;
+    //    padding: 5px 10px;
+    //  }
+    //}
+    //.button_add {
+    //  flex: 1 1 auto;
+    //  width: 25%;
+    //  padding: 5px 10px;
+    //  margin: 3vh 0px 3vh 1vw;
+    //  display: inline-block;
+    //  border: 2px solid red;
+    //  border-radius: 16px;
+    //  box-sizing: border-box;
+    //  background-color: red;
+    //  color: white;
+    //
+    //}
+    //input {
+    //  flex: 1 1 auto;
+    // width: 75%;
+    //  padding: 5px 10px;
+    //  display: inline-block;
+    //  border: 2px solid red;
+    //  border-radius: 16px;
+    //  box-sizing: border-box;
+    //}
+    //Button{
+    //  display: inline-block;
+    //  border: 2px solid red;
+    //  border-radius: 16px;
+    //  box-sizing: border-box;
+    //}
+
+  }
   Form {
     max-width: 80%;
     margin: 40px auto;

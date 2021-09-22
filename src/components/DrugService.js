@@ -67,11 +67,12 @@ export function removeDrug(id) {
             console.error('Error:', error);
         });
 }
-export function editDrug(quantity, openDate, id) {
+export function editDrug(quantity, openDate, id, validityDate) {
 
     const data = {
         "openDate": openDate,
-        "quantity": quantity
+        "quantity": quantity,
+        "validityDate": validityDate
     };
     fetch('http://localhost:4000/drugs/' + id, {
         method: 'PATCH', // or 'PUT'

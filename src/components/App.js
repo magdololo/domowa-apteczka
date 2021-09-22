@@ -9,7 +9,9 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faChevronDown, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 import './App.scss';
-
+import {FormControl, InputGroup} from "react-bootstrap";
+import {Button} from "react-bootstrap";
+import {Stack} from 'react-bootstrap';
 library.add( faTrashAlt, faChevronDown )
 
 function App() {
@@ -18,14 +20,36 @@ function App() {
     const [editDrug, setEditDrug] = useState({});
     const [formState, setFormState] = useState();
     const [formShow, setFormShow] = useState(false);
+    const [filterDrugs, setFilterDrugs] = useState([]);
+    const [search,setSearch] = useState("");
 
-    useEffect(() =>{
+    useEffect( () =>{
         asyncFetch(drugs, setDrugs);
     },[]);
 
+    useEffect(()=>{
+        setFilterDrugs(drugs);
+    },[drugs]);
 
+    const filter = (e) => {
 
-    const handleAddDrug = (nameDrug, expireDate,quantity,openDate, validityDate,id) => {
+        const keyword = e.target.value;
+        if(keyword !== ''){
+             let filterDrugs = [...drugs].filter((drug)=>{
+               if(drug.nameDrug.toLowerCase().startsWith(keyword)){
+                   return drug;
+               } else {
+                   return ;
+               }
+            });
+            setFilterDrugs(filterDrugs);
+        } else {
+            setFilterDrugs (drugs);
+        }
+        setSearch(keyword);
+    };
+
+        const handleAddDrug = (nameDrug, expireDate,quantity,openDate, validityDate,id) => {
         //console.log(nameDrug, expireDate,quantity);
         const drug = {
             nameDrug,
@@ -92,17 +116,51 @@ function App() {
 return(
     <div className="App">
 
-        <button className="button" onClick={()=>{
-            setFormShow(true);
-            setFormState("ADD");
-        }}>+</button>
-         <FormModal handleAdd={handleAddDrug} showModal={formShow} formState={formState} setFormShow={setFormShow}/>
+        <div style={{maxHeight: "85vh", overflow: "scroll",  maxWidth: "95vw", margin: "0 auto"}}>
+        <ListDrugs  drugs={filterDrugs} handleEdit={handleAddEdit} handleDelete={handleDelete} setFormShow={setFormShow}/>
+        </div>
+        <div className="bottom_menu">
+        <Stack direction="horizontal" gap={1}>
+            <FormControl className="me-auto" placeholder="Wyszukaj lek..."  onChange={filter} value={search}/>
+            <Button variant="secondary" >Wyczyść</Button>
+            <div className="vr" />
+            <Button variant="outline-danger" onClick={()=>{
+                       setFormShow(true);
+                       setFormState("ADD");}}>Dodaj&nbsp;lek</Button>
+        </Stack>
+        </div>
+        {/*<div className="bottom_menu">*/}
+        {/*<InputGroup className="mb-3">*/}
 
-        {/*editDrug to zmienna stanowa */}
-        <ListDrugs drugs={drugs} handleEdit={handleAddEdit} handleDelete={handleDelete} setFormShow={setFormShow}/>
+        {/*    <FormControl*/}
+        {/*        placeholder="Recipient's username"*/}
+        {/*        aria-label="Recipient's username"*/}
+        {/*        // aria-describedby="basic-addon2"*/}
+        {/*        onChange={filter}*/}
+        {/*        value={search}*/}
+        {/*    />*/}
+        {/*    <Button variant="outline-secondary">*/}
+        {/*        Wyczyść*/}
+        {/*    </Button>*/}
+        {/*</InputGroup>*/}
+
+
+
+        {/*    <Button variant="outline-secondary" className="button_add"  onClick={()=>{*/}
+        {/*        setFormShow(true);*/}
+        {/*        setFormState("ADD");}}>*/}
+        {/*        Dodaj lek*/}
+        {/*    </Button>*/}
+        {/*    / <button className="button" onClick={()=>{*/}
+        {/*    // setFormShow(true);*/}
+        {/*    // setFormState("ADD");*/}
+        {/*    // }}>Dodaj lek</button>*!/*/}
+        {/*</div>*/}
+        <FormModal handleAdd={handleAddDrug} showModal={formShow} formState={formState} setFormShow={setFormShow}/>
 
     </div>
   );
 }
 
 export default App;
+//<FormEdit handleAddEdit={handleAddEdit} drug={editDrug} />
