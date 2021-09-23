@@ -12,7 +12,6 @@ function ToggleDrugAccordion({ children, eventKey, callback, }) {
     );
     const isCurrentEventKey = activeEventKey === eventKey;
 
-
     return (
         <div
             type="text"
@@ -20,18 +19,13 @@ function ToggleDrugAccordion({ children, eventKey, callback, }) {
             style={
                 {
                   border: "0", display: "flex", flex: "1 1 auto"
-
                 }
             }
-
             onClick={decoratedOnClick}
         >
             {isCurrentEventKey ?  <FontAwesomeIcon icon="chevron-down" rotation={180} size="lg"  className="chevron" /> :  <FontAwesomeIcon icon= "chevron-down"  size="lg" className="chevron"/>}
-
             {children}
         </div>
     );
 }
 export default ToggleDrugAccordion;
-
-// `url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E")`

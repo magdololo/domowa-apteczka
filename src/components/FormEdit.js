@@ -1,8 +1,9 @@
 import {useState, useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Form, Button, Col, Row} from 'react-bootstrap';
+import {editDrug as editDrugService} from "./DrugService";
 
-const FormEdit=({handleAddEdit, drug, closeModal}) => {
+const FormEdit=({handleAddEdit, drug, closeModal, drugs, setDrugs, setFormState}) => {
     const [nameDrug, setNameDrug] = useState(drug.nameDrug);
     const [expireDate, setExpireDate] = useState(drug.expireDate);
     const [quantity, setQuantity] = useState(drug.quantity);
@@ -36,7 +37,23 @@ const FormEdit=({handleAddEdit, drug, closeModal}) => {
     const edit= (e)=>{
         e.preventDefault();
         console.log("w formModal" + drug);
-        handleAddEdit(drug.id, nameDrug, expireDate, quantity, openDate, validityDate);
+        let drugsArray = [...drugs];
+        //console.log(drugsArray);
+        const editDrugInState = {
+            nameDrug,
+            expireDate,
+            quantity,
+            openDate,
+            validityDate,
+            id: drug.id
+        }
+
+        drugsArray = drugsArray.filter(editDrugInState=>editDrugInState.id !== drug.id);
+        drugsArray.push(editDrugInState);
+        setDrugs(drugsArray);
+        setFormState('ADD');
+        editDrugService(quantity, openDate, drug.id, validityDate);
+
         e.target.reset();
         closeModal();
     };
