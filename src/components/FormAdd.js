@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Form, Button, Col, Row} from 'react-bootstrap';
 import {addDrug} from "./DrugService";
 
-const FormAdd = ({handleAdd}) =>{
+const FormAdd = ({handleAdd, closeModal}) =>{
 
     const [nameDrug, setNameDrug] = useState('');
     const [expireDate, setExpireDate] = useState();
@@ -31,7 +31,7 @@ const FormAdd = ({handleAdd}) =>{
         let id =  await addDrug(nameDrug, expireDate, quantity,openDate,validityDate);
         handleAdd(nameDrug, expireDate,quantity,openDate, validityDate,id);
         e.target.reset();
-
+        closeModal();
 
         };
 

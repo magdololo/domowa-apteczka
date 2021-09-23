@@ -27,7 +27,7 @@ const  FormModal = ({handleAddEdit, drug, handleAdd, formState, showModal, setFo
                 </Modal.Header>
                 <Modal.Body>
                     {formState==="ADD" ?
-                        <FormAdd handleAdd={handleAdd}/> :
+                        <FormAdd handleAdd={handleAdd} closeModal={handleClose}/> :
                     <FormEdit handleAddEdit={handleAddEdit} drug={drug} closeModal={handleClose} />}
                 </Modal.Body>
 
