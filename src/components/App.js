@@ -122,40 +122,16 @@ return(
         <div className="bottom_menu">
         <Stack direction="horizontal" gap={1}>
             <FormControl className="me-auto" placeholder="Wyszukaj lek..."  onChange={filter} value={search}/>
-            <Button variant="secondary" >Wyczyść</Button>
+            <Button variant="secondary" onClick={()=>{
+                setSearch("");
+                setFilterDrugs(drugs);
+            }} >Wyczyść</Button>
             <div className="vr" />
             <Button variant="outline-danger" onClick={()=>{
                        setFormShow(true);
                        setFormState("ADD");}}>Dodaj&nbsp;lek</Button>
         </Stack>
         </div>
-        {/*<div className="bottom_menu">*/}
-        {/*<InputGroup className="mb-3">*/}
-
-        {/*    <FormControl*/}
-        {/*        placeholder="Recipient's username"*/}
-        {/*        aria-label="Recipient's username"*/}
-        {/*        // aria-describedby="basic-addon2"*/}
-        {/*        onChange={filter}*/}
-        {/*        value={search}*/}
-        {/*    />*/}
-        {/*    <Button variant="outline-secondary">*/}
-        {/*        Wyczyść*/}
-        {/*    </Button>*/}
-        {/*</InputGroup>*/}
-
-
-
-        {/*    <Button variant="outline-secondary" className="button_add"  onClick={()=>{*/}
-        {/*        setFormShow(true);*/}
-        {/*        setFormState("ADD");}}>*/}
-        {/*        Dodaj lek*/}
-        {/*    </Button>*/}
-        {/*    / <button className="button" onClick={()=>{*/}
-        {/*    // setFormShow(true);*/}
-        {/*    // setFormState("ADD");*/}
-        {/*    // }}>Dodaj lek</button>*!/*/}
-        {/*</div>*/}
         <FormModal handleAdd={handleAddDrug} showModal={formShow} formState={formState} setFormShow={setFormShow}/>
 
     </div>
