@@ -1,92 +1,58 @@
-import {useEffect} from "react";
+import { collection, addDoc, getDocs, getFirestore, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
-export const asyncFetch = (drugs, setDrugs) =>{
-    fetch('http://localhost:4000/drugs')
-        .then(response => {
-            if (response.ok) {
-                return response;
-            }
-            throw Error(response.status)
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log("data z response")
-            console.log(data);
 
-            setDrugs (data) ;
-            console.log(drugs)
+export  const asyncFetch = async (setDrugs) =>{
 
-        })
+    const auth = getAuth();
+    const db = getFirestore();
+    const querySnapshot = await getDocs(collection(db, "drugs/"+ auth.currentUser.uid+"/drugs"));
+    console.log(querySnapshot);
+    const drugs = [];
+     querySnapshot.forEach((doc) => {let drug = {
+           id: doc.id,
+           ...doc.data()
+       }
+       drugs.push(drug);}
+    );
+setDrugs(drugs);
+return;
+
 }
 
-
-
-
-
-
 export async function addDrug(nameDrug, expireDate, quantity,openDate,validityDate) {
+
     const data = {
         "nameDrug": nameDrug,
         "expireDate": expireDate,
-        "openDate": openDate,
-        "validityDate": validityDate,
+        "openDate": openDate ? openDate : null,
+        "validityDate": validityDate ? validityDate : null,
         "quantity": quantity,
 
     };
+    const auth = getAuth();
+    const db = getFirestore();
+    const docRef = await addDoc(collection(db, "drugs/"+ auth.currentUser.uid+"/drugs"), data);
 
-    console.log(data);
-    let id = 0;
-    let response = await fetch ('http://localhost:4000/drugs', {
-        method: 'POST', // or 'PUT'
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    });
-    let responseJson = await response.json();
-    console.log('Success:', responseJson);
-    id = responseJson.id;
-
-    return id;
+    return docRef.id;
 }
 
-export function removeDrug(id) {
+export async function removeDrug(id) {
+    const auth = getAuth();
+    const db = getFirestore();
+    await deleteDoc(doc(db, "drugs/"+ auth.currentUser.uid+"/drugs", id));
 
-    fetch('http://localhost:4000/drugs/' + id, {
-        method: 'DELETE', // or 'PUT'
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(),
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
 }
-export function editDrug(quantity, openDate, id, validityDate) {
+export async function editDrug(quantity, openDate, id, validityDate) {
 
     const data = {
-        "openDate": openDate,
-        "quantity": quantity,
-        "validityDate": validityDate
+        "openDate": openDate ?? null,
+        "quantity": quantity ?? null,
+        "validityDate": validityDate ?? null
     };
-    fetch('http://localhost:4000/drugs/' + id, {
-        method: 'PATCH', // or 'PUT'
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+    const auth = getAuth();
+    const db = getFirestore();
+    const editDrugRef = doc(db,"drugs/"+ auth.currentUser.uid+"/drugs", id );
+    await updateDoc(editDrugRef,data);
 
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
 }

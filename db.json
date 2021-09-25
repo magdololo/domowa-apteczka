@@ -260,6 +260,40 @@
       "expireDate": "2021-10-10",
       "quantity": "4",
       "id": 72
+    },
+    {
+      "nameDrug": "apap",
+      "expireDate": "2021-10-10",
+      "quantity": "2",
+      "id": 73
+    },
+    {
+      "nameDrug": "zyrtec",
+      "expireDate": "2022-03-13",
+      "quantity": "2",
+      "id": 74
+    },
+    {
+      "nameDrug": "rytryrr",
+      "expireDate": "2021-10-01",
+      "quantity": 0,
+      "id": 75
+    },
+    {
+      "nameDrug": "nbnnn",
+      "expireDate": "2021-10-01",
+      "openDate": null,
+      "validityDate": null,
+      "quantity": "1",
+      "id": 76
+    },
+    {
+      "nameDrug": "mucosolwan",
+      "expireDate": "2022-09-30",
+      "openDate": "2021-09-24",
+      "validityDate": "90",
+      "quantity": "1",
+      "id": 77
     }
   ]
 }

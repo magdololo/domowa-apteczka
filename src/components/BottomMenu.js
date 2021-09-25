@@ -1,7 +1,19 @@
 import {Button, FormControl, Stack} from "react-bootstrap";
 import {useState} from "react";
+import { getAuth, signOut } from "firebase/auth";
+
 
 const BottomMenu = ({setFilterDrugs, drugs, setShowFormModal, setFormState})=> {
+
+    const logout = () => {
+        const auth = getAuth();
+        signOut(auth).then(() => {
+            console.log("logout successful")
+        }).catch((error) => {
+            console.log("logout error")
+        });
+    }
+
      const [search,setSearch] = useState("");
 
      const filter = (e) => {
@@ -35,6 +47,7 @@ const BottomMenu = ({setFilterDrugs, drugs, setShowFormModal, setFormState})=> {
                  setShowFormModal(true);
                  setFormState("ADD");
              }}>Dodaj&nbsp;lek</Button>
+             <Button onClick={()=>logout()} >Wyloguj</Button>
          </Stack>
      </div>
      )
